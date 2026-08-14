@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IPL Technologies | Grade 11 & 12 Computer Science Classes</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-main: #070b14;
+            --bg-surface: #0f172a;
+            --bg-card: #131f38;
+            --accent-yellow: #facc15;
+            --accent-yellow-hover: #eab308;
+            --accent-cyan: #06b6d4;
+            --text-main: #ffffff;
+            --text-muted: #cbd5e1;
+            --border-color: rgba(250, 204, 21, 0.35);
+            --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* Fixed Bottom Urgent Notification / Timer Bar */
+        .urgency-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(7, 11, 20, 0.98);
+            backdrop-filter: blur(16px);
+            border-top: 2px solid var(--accent-yellow);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -5px 25px rgba(250, 204, 21, 0.2);
+            gap: 10px;
+        }
+
+        .urgency-text {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        @media(min-width: 576px) {
+            .urgency-text {
+                flex-direction: row;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .fast-countdown {
+            font-family: monospace;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--accent-yellow);
+            background: rgba(250, 204, 21, 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(250, 204, 21, 0.5);
+            white-space: nowrap;
+        }
+
+        .btn-action {
+            background: var(--accent-yellow);
+            color: #070b14;
+            font-weight: 800;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-action:hover {
+            background: var(--accent-yellow-hover);
+            transform: translateY(-1px);
+        }
+
+        /* WhatsApp Floating Widget */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 75px;
+            right: 15px;
+            background: #166534;
+            border: 2px solid #22c55e;
+            color: #22c55e;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+            z-index: 1001;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        /* Navigation with Logo & Text Combination */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 4%;
+            background: rgba(7, 11, 20, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid rgba(250, 204, 21, 0.25);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .nav-right-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 38px;
+            width: auto;
+            max-width: 130px;
+            object-fit: contain;
+            border-radius: 4px;
+            background: #ffffff;
+            padding: 2px;
+            border: 1px solid var(--accent-yellow);
+        }
+
+        .brand-title-text {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 0.2px;
+        }
+
+        .brand-title-text span {
+            color: var(--accent-yellow);
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .nav-badge {
+            background: rgba(250, 204, 21, 0.15);
+            border: 1px solid var(--accent-yellow);
+            color: var(--accent-yellow);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* Translation Toggle Button */
+        .lang-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--accent-yellow);
+            color: var(--accent-yellow);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-toggle-btn:hover {
+            background: rgba(250, 204, 21, 0.15);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 30px 4% 20px 4%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        @media(min-width: 992px) {
+            .hero {
+                grid-template-columns: 1.2fr 0.8fr;
+                padding: 50px 5%;
+                gap: 30px;
+            }
+        }
+
+        .hero-content h1 {
+            font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent-yellow);
+            text-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 18px;
+        }
+
+        .hero-features-list {
+            list-style: none;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        @media(min-width: 576px) {
+            .hero-features-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .hero-features-list li {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .hero-features-list li i {
+            color: var(--accent-yellow);
+        }
+
+        /* Hero Highlights Card */
+        .hero-card {
+            background: var(--bg-surface);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .hero-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            color: var(--accent-yellow);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .highlight-box-item {
+            background: var(--bg-card);
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(250, 204, 21, 0.2);
+        }
+
+        .highlight-box-item strong {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--accent-yellow);
+            margin-bottom: 2px;
+        }
+
+        .highlight-box-item p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Section Headings */
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 4%;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-header h2 span {
+            color: var(--accent-yellow);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Detailed Programming Sections (Python, C, C++) */
+        .lang-section {
+            padding: 40px 4%;
+            background: var(--bg-surface);
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .lang-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .lang-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        @media(min-width: 900px) {
+            .lang-card {
+                grid-template-columns: 0.32fr 0.68fr;
+                align-items: start;
+                padding: 25px;
+            }
+        }
+
+        .lang-header-col {
+            border-bottom: 1px solid rgba(250, 204, 21, 0.2);
+            padding-bottom: 12px;
+        }
+
+        @media(min-width: 900px) {
+            .lang-header-col {
+                border-bottom: none;
+                border-right: 1px solid rgba(250, 204, 21, 0.2);
+                padding-right: 20px;
+                padding-bottom: 0;
+            }
+        }
+
+        .lang-badge {
+            display: inline-block;
+            background: rgba(250, 204, 21, 0.2);
+            color: var(--accent-yellow);
+            border: 1px solid var(--accent-yellow);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+        }
+
+        .lang-header-col h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .lang-header-col p {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+        }
+
+        .lang-details-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        @media(min-width: 650px) {
+            .lang-details-col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .detail-box {
+            background: rgba(7, 11, 20, 0.75);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            padding: 14px;
+            border-radius: 8px;
+        }
+
+        .detail-box h4 {
+            font-size: 0.88rem;
+            color: var(--accent-yellow);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+        }
+
+        .detail-box p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 40px 4%;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media(min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(min-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-box {
+            background: var(--bg-surface);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            transition: border-color 0.2s ease;
+        }
+
+        .feature-box:hover {
+            border-color: var(--accent-yellow);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(250, 204, 21, 0.2);
+            border: 1px solid var(--accent-yellow);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--accent-yellow);
+            margin-bottom: 12px;
+        }
+
+        .feature-box h4 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .feature-box p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* Extended Deep-Dive Section for Python, C, C++ */
+        .deepdive-section {
+            padding: 40px 4%;
+            background: var(--bg-surface);
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .deepdive-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media(min-width: 768px) {
+            .deepdive-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .deepdive-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .deepdive-card h3 {
+            font-size: 1.1rem;
+            color: var(--accent-yellow);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+        }
+
+        .deepdive-card p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .deepdive-card ul {
+            list-style: none;
+            margin-top: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .deepdive-card ul li {
+            font-size: 0.8rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .deepdive-card ul li i {
+            color: var(--accent-yellow);
+            font-size: 0.7rem;
+        }
+
+        /* Horizontal Scrolling Gallery Section */
+        .gallery-section {
+            padding: 40px 0;
+            background: var(--bg-main);
+        }
+
+        .gallery-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 20px 4%;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-yellow) var(--bg-surface);
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .gallery-container::-webkit-scrollbar-track {
+            background: var(--bg-surface);
+            border-radius: 4px;
+        }
+
+        .gallery-container::-webkit-scrollbar-thumb {
+            background: var(--accent-yellow);
+            border-radius: 4px;
+        }
+
+        .gallery-item {
+            flex: 0 0 300px;
+            background: var(--bg-surface);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        @media(min-width: 768px) {
+            .gallery-item {
+                flex: 0 0 360px;
+            }
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-yellow);
+        }
+
+        .gallery-img-wrapper {
+            width: 100%;
+            height: 220px;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            padding: 16px;
+        }
+
+        .gallery-caption h4 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--accent-yellow);
+            margin-bottom: 4px;
+        }
+
+        .gallery-caption p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 40px 4%;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        @media(min-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .price-card.featured {
+            border-color: var(--accent-yellow);
+            background: linear-gradient(150deg, #131f38 0%, #0a1124 100%);
+            box-shadow: 0 10px 30px rgba(250, 204, 21, 0.25);
+            position: relative;
+        }
+
+        .featured-tag {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--accent-yellow);
+            color: #070b14;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-header h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .price-header p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .price-amount {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--accent-yellow);
+            margin-bottom: 14px;
+        }
+
+        .price-amount span {
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 18px;
+        }
+
+        .price-features li {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price-features li i {
+            color: var(--accent-yellow);
+            font-size: 0.75rem;
+        }
+
+        /* Enrollment Form Section - Optimized for Mobile */
+        .enroll-section {
+            padding: 40px 4%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .enroll-wrapper {
+            background: var(--bg-surface);
+            border: 2px solid var(--accent-yellow);
+            border-radius: 14px;
+            padding: 24px 15px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        @media(min-width: 576px) {
+            .enroll-wrapper {
+                padding: 35px;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 11px 12px;
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            color: #070b14;
+            font-family: inherit;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        /* High-Contrast Select Dropdown Styling */
+        select.form-control {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23070b14' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+        select.form-control option {
+            background-color: #ffffff;
+            color: #070b14;
+            padding: 12px;
+            font-weight: 600;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-yellow);
+            background: #ffffff;
+            box-shadow: 0 0 12px rgba(250, 204, 21, 0.4);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        @media(min-width: 600px) {
+            .form-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            background: var(--accent-yellow);
+            color: #070b14;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: background 0.2s ease;
+            margin-top: 6px;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-yellow-hover);
+        }
+
+        /* Payment Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 11, 20, 0.95);
+            backdrop-filter: blur(12px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 15px;
+        }
+
+        .modal-box {
+            background: var(--bg-surface);
+            border: 2px solid var(--accent-yellow);
+            border-radius: 14px;
+            padding: 25px 18px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .qr-image-wrapper {
+            width: 180px;
+            height: 180px;
+            background: #ffffff;
+            margin: 12px auto;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .qr-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .bank-details {
+            background: var(--bg-main);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: left;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .bank-details strong {
+            color: var(--text-main);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px 4% 85px 4%;
+            border-top: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        footer span {
+            color: var(--accent-yellow);
+            font-weight: 700;
+        }
+
+        .student-credit {
+            margin-top: 8px;
+            font-size: 0.76rem;
+            color: var(--accent-yellow);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- WhatsApp Floating Widget -->
+    <a href="https://wa.me/919842114238?text=Hi,%20I%20want%20to%20know%20more%20about%20IPL%20Technologies%20Computer%20Classes%20for%20Grade%2011/12." class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Fixed Bottom Urgent Timer Bar with Fast Milliseconds -->
+    <div class="urgency-bar">
+        <div class="urgency-text">
+            <span data-translate="batch_closing"><i class="fas fa-clock" style="color: var(--accent-yellow);"></i> Batch Closing In:</span>
+            <span class="fast-countdown" id="fastTimer">01h 42m 15s 894ms</span>
+        </div>
+        <a href="#enroll" class="btn-action" data-translate="enroll_now">
+            Enroll Now <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Navigation Bar with Logo & Exact Text -->
+    <nav>
+        <a href="#" class="brand-wrapper">
+            <img src="ipl.jpeg" alt="IPL Technologies Logo" class="logo-img" onerror="this.onerror=null; this.src='ipl.jpg';">
+            <div class="brand-title-text" data-translate="brand_title">
+                IPL Technologies
+                <span data-translate="brand_subtitle">Grade 11 & 12 CS Coaching</span>
+            </div>
+        </a>
+        <div class="nav-right-container">
+            <button class="lang-toggle-btn" onclick="toggleLanguage()">
+                <i class="fas fa-globe"></i> <span id="langBtnText">தமிழ் (Tamil)</span>
+            </button>
+            <div class="nav-badge" data-translate="tamil_nadu">Tamil Nadu</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 data-translate="hero_title">Master Computer Science for <span>Grade 11 & 12</span></h1>
+            <p data-translate="hero_desc">Comprehensive, textbook-aligned coaching in Python, C, and C++ tailored for higher secondary students across Tamil Nadu. Build rock-solid logic and score top marks with confidence.</p>
+            <ul class="hero-features-list">
+                <li data-translate="feat_1"><i class="fas fa-check-circle"></i> 100% School Syllabus Coverage</li>
+                <li data-translate="feat_2"><i class="fas fa-check-circle"></i> Practical Lab Sessions Included</li>
+                <li data-translate="feat_3"><i class="fas fa-check-circle"></i> Previous Board Exam Question Bank</li>
+                <li data-translate="feat_4"><i class="fas fa-check-circle"></i> Individual Doubt Clarification</li>
+            </ul>
+            <a href="#enroll" class="btn-action" style="padding: 11px 24px; font-size: 0.86rem;" data-translate="secure_seat">
+                Secure Your Seat <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        <div class="hero-card">
+            <h3 data-translate="why_choose"><i class="fas fa-shield-alt"></i> Why Students Choose Us</h3>
+            <div class="highlight-box-item">
+                <strong data-translate="why_1_title">Zero-Jargon Logic Training</strong>
+                <p data-translate="why_1_desc">Complex syntax and coding logic broken down into simple, easy-to-digest steps for complete beginners.</p>
+            </div>
+            <div class="highlight-box-item">
+                <strong data-translate="why_2_title">Thorough Textbook Problem Solving</strong>
+                <p data-translate="why_2_desc">Every single exercise, output-prediction question, and programming task from your textbook is solved thoroughly.</p>
+            </div>
+            <div class="highlight-box-item">
+                <strong data-translate="why_3_title">Board Exam Oriented Preparation</strong>
+                <p data-translate="why_3_desc">Regular mock tests and structured revision schedules designed specifically to maximize your exam scores.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Detailed Programming Curriculum Section (Python, C, C++) -->
+    <section class="lang-section" id="curriculum">
+        <div class="section-header">
+            <h2 data-translate="curr_heading">Detailed <span>Programming Curriculum</span></h2>
+            <p data-translate="curr_desc">In-depth coverage of Python, C, and C++ structured for higher secondary board exams and practical success.</p>
+        </div>
+
+        <div class="lang-container">
+            <!-- Python Details -->
+            <div class="lang-card">
+                <div class="lang-header-col">
+                    <span class="lang-badge" data-translate="lang_01">Language 01</span>
+                    <h3 data-translate="py_title">Python Programming</h3>
+                    <p data-translate="py_subtitle">Designed for Grade 11 & 12 Computer Science and Computer Applications textbooks.</p>
+                </div>
+                <div class="lang-details-col">
+                    <div class="detail-box">
+                        <h4 data-translate="covered_title"><i class="fas fa-book-open"></i> What is Covered</h4>
+                        <p data-translate="py_covered">Variables, operators, conditional statements, looping constructs, user-defined functions, string manipulations, lists, tuples, dictionaries, and file handling (CSV/text files).</p>
+                    </div>
+                    <div class="detail-box">
+                        <h4 data-translate="taught_title"><i class="fas fa-chalkboard-teacher"></i> How It Is Taught</h4>
+                        <p data-translate="py_taught">Taught from scratch with live interactive coding on computer systems. Every theory concept is immediately followed by hands-on output verification and textbook exercise practice.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C Language Details -->
+            <div class="lang-card">
+                <div class="lang-header-col">
+                    <span class="lang-badge" data-translate="lang_02">Language 02</span>
+                    <h3 data-translate="c_title">C Programming</h3>
+                    <p data-translate="c_subtitle">Building foundational algorithmic thinking and structured programming skills.</p>
+                </div>
+                <div class="lang-details-col">
+                    <div class="detail-box">
+                        <h4 data-translate="covered_title"><i class="fas fa-book-open"></i> What is Covered</h4>
+                        <p data-translate="c_covered">Structure of a C program, fundamental data types, input/output statements, control statements (if, switch, loops), single and multi-dimensional arrays, functions, and basic pointers.</p>
+                    </div>
+                    <div class="detail-box">
+                        <h4 data-translate="taught_title"><i class="fas fa-chalkboard-teacher"></i> How It Is Taught</h4>
+                        <p data-translate="c_taught">Step-by-step logic building through dry-runs on paper, followed by compiler execution in the lab. Students learn how to trace variable values and debug syntax errors independently.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C++ Language Details -->
+            <div class="lang-card">
+                <div class="lang-header-col">
+                    <span class="lang-badge" data-translate="lang_03">Language 03</span>
+                    <h3 data-translate="cpp_title">C++ Programming</h3>
+                    <p data-translate="cpp_subtitle">Mastering Object-Oriented Programming (OOPs) paradigms required for board examinations.</p>
+                </div>
+                <div class="lang-details-col">
+                    <div class="detail-box">
+                        <h4 data-translate="covered_title"><i class="fas fa-book-open"></i> What is Covered</h4>
+                        <p data-translate="cpp_covered">Introduction to OOPs, classes and objects, constructors and destructors, polymorphism (function & operator overloading), inheritance types, and file streams.</p>
+                    </div>
+                    <div class="detail-box">
+                        <h4 data-translate="taught_title"><i class="fas fa-chalkboard-teacher"></i> How It Is Taught</h4>
+                        <p data-translate="cpp_taught">Real-world analogies are used to explain classes and objects. Students practice writing complete class structures and solving previous year board programming questions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2 data-translate="feat_heading">Key Learning <span>Features</span></h2>
+            <p data-translate="feat_desc">Our systematic teaching methodology designed to transform regular students into confident computer science scholars.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
+                <h4 data-translate="f1_title">Practical Lab Drills</h4>
+                <p data-translate="f1_desc">Dedicated computer terminal time for every student to practice syntax and execute programs independently under supervision.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                <h4 data-translate="f2_title">Board Paper Drills</h4>
+                <p data-translate="f2_desc">Extensive practice using previous years' question papers and model test papers to master time management during exams.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fas fa-users"></i></div>
+                <h4 data-translate="f3_title">Small Batch Attention</h4>
+                <p data-translate="f3_desc">Limited batch sizes ensure every single student receives personalized attention and immediate doubt clarification.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fas fa-clipboard-check"></i></div>
+                <h4 data-translate="f4_title">Periodic Assessments</h4>
+                <p data-translate="f4_desc">Weekly tests and structured evaluations to track progress and eliminate weak spots before final school exams.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h4 data-translate="f5_title">Exam Scoring Tips</h4>
+                <p data-translate="f5_desc">Expert guidelines on how to present answers neatly and secure full marks in theory and practical board exams.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                <h4 data-translate="f6_title">Continuous Support</h4>
+                <p data-translate="f6_desc">Direct mentor access to clear homework doubts and revision queries even outside regular class hours.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extended Deep-Dive Section for Python, C, C++ -->
+    <section class="deepdive-section" id="deepdive">
+        <div class="section-header">
+            <h2 data-translate="deep_heading">Mastering Core Concepts: <span>Python, C & C++</span></h2>
+            <p data-translate="deep_desc">A deeper look into how we help you master syntax intricacies, memory management, and advanced programming constructs.</p>
+        </div>
+        <div class="deepdive-grid">
+            <div class="deepdive-card">
+                <h3><i class="fab fa-python" style="color: var(--accent-yellow);"></i> <span data-translate="d1_title">Python Deep Dive</span></h3>
+                <p data-translate="d1_desc">Python is the cornerstone of modern higher secondary computer science curricula. We focus heavily on clean indentation practices, modular programming using functions, and efficient data structures.</p>
+                <ul>
+                    <li data-translate="d1_li1"><i class="fas fa-check-circle"></i> Lists, Tuples & Dictionary Comprehensions</li>
+                    <li data-translate="d1_li2"><i class="fas fa-check-circle"></i> Text & CSV File Operations Simplified</li>
+                    <li data-translate="d1_li3"><i class="fas fa-check-circle"></i> Database Connectivity (SQLite3 with Python)</li>
+                </ul>
+            </div>
+            <div class="deepdive-card">
+                <h3><i class="fas fa-code" style="color: var(--accent-yellow);"></i> <span data-translate="d2_title">C Language Mastery</span></h3>
+                <p data-translate="d2_desc">C forms the backbone of structured programming and low-level understanding. Our sessions demystify memory concepts, format specifiers, and array logic so you never fear compilation errors.</p>
+                <ul>
+                    <li data-translate="d2_li1"><i class="fas fa-check-circle"></i> Mastering Loops & Nested Control Structures</li>
+                    <li data-translate="d2_li2"><i class="fas fa-check-circle"></i> 1D & 2D Matrix Manipulation Programs</li>
+                    <li data-translate="d2_li3"><i class="fas fa-check-circle"></i> Introduction to Pointers & Address Arithmetic</li>
+                </ul>
+            </div>
+            <div class="deepdive-card">
+                <h3><i class="fas fa-cube" style="color: var(--accent-yellow);"></i> <span data-translate="d3_title">C++ Object-Oriented Focus</span></h3>
+                <p data-translate="d3_desc">C++ introduces powerful Object-Oriented principles. We break down abstract concepts like encapsulation, inheritance hierarchies, and polymorphism into concrete, easy-to-write code templates.</p>
+                <ul>
+                    <li data-translate="d3_li1"><i class="fas fa-check-circle"></i> Access Specifiers (Public, Private, Protected)</li>
+                    <li data-translate="d3_li2"><i class="fas fa-check-circle"></i> Constructors, Destructors & Scope Resolution</li>
+                    <li data-translate="d3_li3"><i class="fas fa-check-circle"></i> File Streams (`ifstream`, `ofstream`, `fstream`)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horizontal Scrolling Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="section-header">
+            <h2 data-translate="gal_heading">Campus & Lab <span>Gallery</span></h2>
+            <p data-translate="gal_desc">Take a quick glance at our state-of-the-art computer lab facilities, interactive student sessions, and classroom environments.</p>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <div class="gallery-img-wrapper">
+                    <img src="image 1.jpg" alt="Computer Lab Session">
+                </div>
+                <div class="gallery-caption">
+                    <h4 data-translate="g1_title">Interactive Lab Training</h4>
+                    <p data-translate="g1_desc">Students practicing coding concepts hands-on with individual systems.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-img-wrapper">
+                    <img src="image 2.webp" alt="Advanced Coding Workshop">
+                </div>
+                <div class="gallery-caption">
+                    <h4 data-translate="g2_title">Advanced Workshop</h4>
+                    <p data-translate="g2_desc">Special sessions focusing on board exam problem-solving techniques.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-img-wrapper">
+                    <img src="image 3.avif" alt="Student Doubt Clarification">
+                </div>
+                <div class="gallery-caption">
+                    <h4 data-translate="g3_title">Personal Mentorship</h4>
+                    <p data-translate="g3_desc">One-on-one attention ensuring every student's doubts are resolved.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-img-wrapper">
+                    <img src="image 5.jpg" alt="Successful Batch Celebration">
+                </div>
+                <div class="gallery-caption">
+                    <h4 data-translate="g4_title">Successful Batch</h4>
+                    <p data-translate="g4_desc">Celebrating top scores and academic excellence with our students.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="section-header">
+            <h2 data-translate="price_heading">Course Fee Structure</h2>
+            <p data-translate="price_desc">Transparent pricing plans tailored for individual attention or group study.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-header">
+                    <h3 data-translate="p1_title">Individual Enrollment</h3>
+                    <p data-translate="p1_desc">Dedicated personal mentorship and complete syllabus mastery.</p>
+                </div>
+                <div class="price-amount">₹12,500 <span data-translate="per_student">/ student</span></div>
+                <ul class="price-features">
+                    <li data-translate="p1_li1"><i class="fas fa-check"></i> Python, C & C++ Full Coaching</li>
+                    <li data-translate="p1_li2"><i class="fas fa-check"></i> Complete Textbook Solutions</li>
+                    <li data-translate="p1_li3"><i class="fas fa-check"></i> Weekly Revision & Mock Tests</li>
+                    <li data-translate="p1_li4"><i class="fas fa-check"></i> Individual Doubt Clearance</li>
+                </ul>
+                <a href="#enroll" class="btn-action" style="justify-content: center;" data-translate="choose_ind">Choose Individual</a>
+            </div>
+
+            <div class="price-card featured">
+                <div class="featured-tag" data-translate="pop_choice">Popular Choice</div>
+                <div class="price-header">
+                    <h3 data-translate="p2_title">Squad Group Plan (4 Students)</h3>
+                    <p data-translate="p2_desc">Study with your closest peers and enjoy group savings.</p>
+                </div>
+                <div class="price-amount">₹7,000 <span data-translate="per_student">/ student</span></div>
+                <ul class="price-features">
+                    <li data-translate="p2_li1"><i class="fas fa-check"></i> All Individual Plan Benefits</li>
+                    <li data-translate="p2_li2"><i class="fas fa-check"></i> Collaborative Peer Coding Sessions</li>
+                    <li data-translate="p2_li3"><i class="fas fa-check"></i> Save ₹5,500 per Student</li>
+                    <li data-translate="p2_li4"><i class="fas fa-check"></i> Group Practice Challenges</li>
+                </ul>
+                <a href="#enroll" class="btn-action" style="justify-content: center; background: var(--accent-yellow);" data-translate="choose_group">Choose Group Plan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enrollment Form Section -->
+    <section class="enroll-section" id="enroll">
+        <div class="enroll-wrapper">
+            <div class="section-header" style="margin-bottom: 20px; padding: 0;">
+                <h2 data-translate="form_heading">Student Enrollment Form</h2>
+                <p data-translate="form_desc">Please fill in your details below to proceed with registration.</p>
+            </div>
+            <form id="enrollmentForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-translate="lbl_name">Student Full Name</label>
+                        <input type="text" id="fieldName" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="lbl_grade">Grade / Standard</label>
+                        <select id="fieldGrade" class="form-control" required>
+                            <option value="" disabled selected data-translate="opt_grade">Select Grade</option>
+                            <option value="Grade 11" data-translate="grade_11">Grade 11</option>
+                            <option value="Grade 12" data-translate="grade_12">Grade 12</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-translate="lbl_phone">WhatsApp Mobile Number</label>
+                        <input type="tel" id="fieldPhone" class="form-control" placeholder="10-digit mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="lbl_email">Email Address</label>
+                        <input type="email" id="fieldEmail" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-translate="lbl_subject">Preferred Subject</label>
+                        <select id="fieldSubject" class="form-control" required>
+                            <option value="" disabled selected data-translate="opt_subject">Select Subject</option>
+                            <option value="Python">Python</option>
+                            <option value="C">C</option>
+                            <option value="C++">C++</option>
+                            <option value="Python, C & C++" data-translate="subj_all">Python, C & C++ (All Three)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="lbl_plan">Enrollment Plan</label>
+                        <select id="fieldPlan" class="form-control" required>
+                            <option value="" disabled selected data-translate="opt_plan">Select Plan</option>
+                            <option value="Individual Plan (₹12,500)" data-price="12500" data-translate="plan_ind">Individual Plan (₹12,500)</option>
+                            <option value="Squad Group Plan (₹7,000 per student)" data-price="7000" data-translate="plan_group">Squad Group Plan (₹7,000 per student)</option>
+                            <option value="Special Single Course (₹7,500)" data-price="7500" data-translate="plan_single">Special Single Course (₹7,500)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-translate="lbl_city">City / Town</label>
+                        <input type="text" id="fieldCity" class="form-control" placeholder="e.g., Chennai, Coimbatore, Madurai" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="lbl_school">School Name</label>
+                        <input type="text" id="fieldSchool" class="form-control" placeholder="Enter your school name" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" data-translate="btn_pay">Proceed to Secure Payment <i class="fas fa-lock" style="margin-left: 6px; font-size: 0.8rem;"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Hidden Formspree Form for Automatic Response Sheet Submission -->
+    <form id="formspreeForm" action="https://formspree.io/f/xqpzllev" method="POST" style="display: none;">
+        <input type="text" name="name" id="fs_name">
+        <input type="text" name="grade" id="fs_grade">
+        <input type="tel" name="phone" id="fs_phone">
+        <input type="email" name="email" id="fs_email">
+        <input type="text" name="subject" id="fs_subject">
+        <input type="text" name="plan" id="fs_plan">
+        <input type="text" name="city" id="fs_city">
+        <input type="text" name="school" id="fs_school">
+        <input type="text" name="message" id="fs_message">
+    </form>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <h3 style="font-size: 1.25rem; margin-bottom: 4px; color: var(--accent-yellow);" data-translate="modal_title">Complete Payment</h3>
+            <p id="modalDynamicText" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px; font-weight: 700;">Pay ₹12,500 via GPay or Scan QR</p>
+            
+            <div class="qr-image-wrapper">
+                <img src="qr.jpg" alt="UPI QR Code" onerror="this.onerror=null; this.src='qr.jpeg';">
+            </div>
+            <p style="font-size: 0.72rem; color: var(--accent-yellow);" data-translate="modal_scan">Scan via GPay, PhonePe, Paytm or any UPI app</p>
+
+            <div class="bank-details">
+                <p style="margin-bottom: 3px; font-weight: 700; color: var(--text-main);" data-translate="bank_title">Direct Bank Transfer (NEFT/IMPS):</p>
+                <p><strong data-translate="bank_name_lbl">Account Name:</strong> IPL TECHNOLOGIES</p>
+                <p><strong data-translate="bank_acc_lbl">A/C No:</strong> 301150050800176</p>
+                <p><strong data-translate="bank_ifsc_lbl">IFSC Code:</strong> TMBL0000301</p>
+                <p><strong data-translate="bank_bank_lbl">Bank Name:</strong> TMB Bank Madurai</p>
+            </div>
+
+            <button onclick="confirmPaymentAndSubmit()" class="submit-btn" style="margin-top: 14px; background: #22c55e; color: #ffffff;" data-translate="btn_whatsapp">
+                <i class="fab fa-whatsapp" style="margin-right: 6px;"></i> I Have Paid – Submit & Send WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p data-translate="footer_text">&copy; 2026 <span>IPL Technologies</span>. All rights reserved. For queries, tap the WhatsApp button or call <a href="tel:9842114238" style="color: var(--accent-yellow); text-decoration: none;">9842114238</a>.</p>
+        <div class="student-credit" data-translate="student_credit">Page done by Deepak Sankar (student of IPL technology)</div>
+    </footer>
+
+    <!-- JavaScript for Timer, Formspree & WhatsApp Integration -->
+    <script>
+        // Fast Millisecond Countdown Timer
+        function updateFastTimer() {
+            let totalMs = (1 * 3600 + 42 * 60 + 15) * 1000 + 894;
+            
+            setInterval(() => {
+                totalMs -= 73;
+                if (totalMs < 0) totalMs = 2 * 3600 * 1000;
+
+                const hours = Math.floor(totalMs / (1000 * 60 * 60));
+                const minutes = Math.floor((totalMs / (1000 * 60)) % 60);
+                const seconds = Math.floor((totalMs / 1000) % 60);
+                const milliseconds = Math.floor(totalMs % 1000);
+
+                document.getElementById('fastTimer').textContent = 
+                    String(hours).padStart(2, '0') + 'h ' +
+                    String(minutes).padStart(2, '0') + 'm ' +
+                    String(seconds).padStart(2, '0') + 's ' +
+                    String(milliseconds).padStart(3, '0') + 'ms';
+            }, 50);
+        }
+        updateFastTimer();
+
+        let applicantData = {};
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            applicantData.name = document.getElementById('fieldName').value;
+            applicantData.grade = document.getElementById('fieldGrade').value;
+            applicantData.phone = document.getElementById('fieldPhone').value;
+            applicantData.email = document.getElementById('fieldEmail').value;
+            applicantData.subject = document.getElementById('fieldSubject').value;
+            
+            const planSelect = document.getElementById('fieldPlan');
+            applicantData.plan = planSelect.value;
+            
+            // Fetch price from selected option data attribute or fallback to extracting numbers
+            let selectedOption = planSelect.options[planSelect.selectedIndex];
+            let priceText = "12,500";
+            if (selectedOption.hasAttribute('data-price')) {
+                let rawPrice = selectedOption.getAttribute('data-price');
+                priceText = Number(rawPrice).toLocaleString('en-IN');
+            } else {
+                let match = applicantData.plan.match(/₹([0-9,]+)/);
+                if (match) priceText = match[1];
+            }
+
+            // Update modal text dynamically to show exact payment instruction
+            document.getElementById('modalDynamicText').innerHTML = `Pay <span style="color: var(--accent-yellow); font-size: 1rem;">₹${priceText}</span> via GPay or Scan QR`;
+
+            applicantData.city = document.getElementById('fieldCity').value;
+            applicantData.school = document.getElementById('fieldSchool').value;
+
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        function confirmPaymentAndSubmit() {
+            // Populate hidden Formspree form fields
+            document.getElementById('fs_name').value = applicantData.name;
+            document.getElementById('fs_grade').value = applicantData.grade;
+            document.getElementById('fs_phone').value = applicantData.phone;
+            document.getElementById('fs_email').value = applicantData.email;
+            document.getElementById('fs_subject').value = applicantData.subject;
+            document.getElementById('fs_plan').value = applicantData.plan;
+            document.getElementById('fs_city').value = applicantData.city;
+            document.getElementById('fs_school').value = applicantData.school;
+            document.getElementById('fs_message').value = `New Enrollment: ${applicantData.name} (${applicantData.grade}) registered for ${applicantData.subject} under ${applicantData.plan}. City: ${applicantData.city}, School: ${applicantData.school}, Phone: ${applicantData.phone}, Email: ${applicantData.email}`;
+
+            // Submit data to Formspree endpoint in background via Fetch API
+            const formspreeData = new FormData(document.getElementById('formspreeForm'));
+            fetch("https://formspree.io/f/xqpzllev", {
+                method: "POST",
+                body: formspreeData,
+                headers: {
+                    'Accept': 'json'
+                }
+            }).catch(error => console.log('Formspree submission error:', error));
+
+            // Open WhatsApp with populated confirmation message
+            const message = `Hello IPL Technologies! I have completed my payment.%0A%0A- Name: ${applicantData.name}%0A- Grade: ${applicantData.grade}%0A- Phone: ${applicantData.phone}%0A- Email: ${applicantData.email}%0A- Subject: ${applicantData.subject}%0A- Plan: ${applicantData.plan}%0A- City: ${applicantData.city}%0A- School: ${applicantData.school}%0A%0A[Payment screenshot attached shortly]`;
+            window.open(`https://wa.me/919842114238?text=${message}`, '_blank');
+
+            closeModal();
+        }
+
+        // Inbuilt Tamil Translation Dictionary & Toggle Logic
+        const translations = {
+            ta: {
+                batch_closing: 'பேட்ச் முடிவடைகிறது:',
+                enroll_now: 'இப்போதே பதிவு செய்யுங்கள்',
+                brand_title: 'IPL டெக்னாலஜிஸ்',
+                brand_subtitle: '11 மற்றும் 12 ஆம் வகுப்பு கணினி அறிவியல் பயிற்சி',
+                tamil_nadu: 'தமிழ்நாடு',
+                hero_title: '11 & 12 ஆம் வகுப்பிற்கான <span>கணினி அறிவியலில்</span> தேர்ச்சி பெறுங்கள்',
+                hero_desc: 'தமிழ்நாடு முழுவதும் உள்ள மேல்நிலை மாணவர்களுக்காக வடிவமைக்கப்பட்ட பைதான், சி மற்றும் சி++ பாடத்திட்ட அடிப்படையிலான விரிவான பயிற்சி. வலுவான லாஜிக்குகளை உருவாக்கி அதிக மதிப்பெண்களைப் பெறுங்கள்.',
+                feat_1: '100% பள்ளி பாடத்திட்ட பாதுகாப்பு',
+                feat_2: 'நடைமுறை ஆய்வக அமர்வுகள் அடங்கும்',
+                feat_3: 'முந்தைய போர்டு தேர்வு கேள்வி வங்கி',
+                feat_4: 'தனிப்பட்ட சந்தேக தெளிவுபடுத்தல்',
+                secure_seat: 'உங்கள் இடத்தை உறுதிப்படுத்தவும்',
+                why_choose: 'மாணவர்கள் எங்களை ஏன் தேர்வு செய்கிறார்கள்',
+                why_1_title: 'எளிய லாஜிக் பயிற்சி',
+                why_1_desc: 'முற்றிலும் தொடக்கநிலையாளர்களுக்கு புரியும் வகையில் சிக்கலான தொடரியல் மற்றும் கோடிங் லாஜிக்கள் எளிய படிகளாகப் பிரிக்கப்பட்டுள்ளன.',
+                why_2_title: 'துல்லியமான பாடப்புத்தக பிரச்சனை தீர்வு',
+                why_2_desc: 'உங்கள் பாடப்புத்தகத்தில் உள்ள ஒவ்வொரு உடற்பயிற்சி, வெளியீட்டு கணிப்பு கேள்வி மற்றும் நிரலாக்க பணி ஆகியவை முழுமையாக தீர்க்கப்படுகின்றன.',
+                why_3_title: 'போர்டு தேர்வு நோக்கிய தயாரிப்பு',
+                why_3_desc: 'உங்கள் தேர்வு மதிப்பெண்களை அதிகரிக்க பிரத்யேகமாக வடிவமைக்கப்பட்ட வழக்கமான மாதிரி தேர்வுகள்.',
+                curr_heading: 'விரிவான <span>நிரலாக்க பாடத்திட்டம்</span>',
+                curr_desc: 'உயர்நிலைப் பள்ளி தேர்வுகள் மற்றும் நடைமுறை வெற்றிக்காக கட்டமைக்கப்பட்ட பைதான், சி மற்றும் சி++ பற்றிய ஆழமான கற்றல்.',
+                lang_01: 'மொழி 01',
+                py_title: 'பைதான் புரோகிராமிங்',
+                py_subtitle: '11 மற்றும் 12 ஆம் வகுப்பு கணினி அறிவியல் மற்றும் கணினி பயன்பாடுகளுக்கானது.',
+                covered_title: 'என்ன மூடப்பட்டுள்ளது',
+                taught_title: 'இது எவ்வாறு கற்பிக்கப்படுகிறது',
+                py_covered: 'மாறிகள், ஆபரேட்டர்கள், நிபந்தனை அறிக்கைகள், லூப்பிங் கட்டமைப்புகள், பயனர் வரையறுக்கப்பட்ட செயல்பாடுகள், சரம் கையாளுதல்கள், பட்டியல்கள், டூப்பிள்கள் மற்றும் கோப்பு கையாளுதல்.',
+                py_taught: 'கணினி அமைப்புகளில் நேரடி ஊடாடும் கோடிங் மூலம் தொடக்கத்திலிருந்து கற்பிக்கப்படுகிறது. ஒவ்வொரு கோட்பாடும் கைகளால் சரிபார்க்கப்படுகிறது.',
+                lang_02: 'மொழி 02',
+                c_title: 'C புரோகிராமிங்',
+                c_subtitle: 'அடிப்படை வழிமுறை சிந்தனை மற்றும் கட்டமைக்கப்பட்ட நிரலாக்க திறன்களை உருவாக்குதல்.',
+                c_covered: 'C நிரலின் அமைப்பு, அடிப்படை தரவு வகைகள், உள்ளீடு/வெளியீடு அறிக்கைகள், கட்டுப்பாட்டு அறிக்கைகள், வரிசைகள், செயல்பாடுகள் மற்றும் அடிப்படை சுட்டிகள்.',
+                c_taught: 'காகிதத்தில் உலர்ந்த ரன்கள் மூலம் படிப்படியான லாஜிக் உருவாக்கம், அதைத் தொடர்ந்து லேப்பில் கம்பைலர் இயக்கம்.',
+                lang_03: 'மொழி 03',
+                cpp_title: 'C++ புரோகிராமிங்',
+                cpp_subtitle: 'போர்டு தேர்வுகளுக்கு தேவையான ஆப்ஜெக்ட்-ஓரியண்டட் புரோகிராமிங் (OOPs) நெறிமுறைகளில் தேர்ச்சி பெறுதல்.',
+                cpp_covered: 'OOPs அறிமுகம், வகுப்புகள் மற்றும் பொருள்கள், கன்ஸ்ட்ரக்டர்கள், பாலிமார்பிசம், பரம்பரை வகைகள் மற்றும் கோப்பு நீரோடைகள்.',
+                cpp_taught: 'வகுப்புகள் மற்றும் பொருள்களை விளக்க நிஜ உலக ஒப்புமைகள் பயன்படுத்தப்படுகின்றன. மாணவர்கள் கடந்த ஆண்டு போர்டு கேள்விகளை பயிற்சி செய்கிறார்கள்.',
+                feat_heading: 'முக்கிய கற்றல் <span>அம்சங்கள்</span>',
+                feat_desc: 'வழக்கமான மாணவர்களை நம்பிக்கையுள்ள கணினி அறிவியல் அறிஞர்களாக மாற்ற வடிவமைக்கப்பட்ட எங்களின் முறையான கற்பித்தல் முறை.',
+                f1_title: 'நடைமுறை ஆய்வக பயிற்சிகள்',
+                f1_desc: 'ஒவ்வொரு மாணவரும் சுதந்திரமாக புரோகிராம்களை இயக்க அர்ப்பணிக்கப்பட்ட கணினி முனை நேரம்.',
+                f2_title: 'போர்டு தாள் பயிற்சிகள்',
+                f2_desc: 'தேர்வுகளின் போது நேர மேலாண்மையில் தேர்ச்சி பெற முந்தைய ஆண்டுகளின் கேள்வித்தாள்களைப் பயன்படுத்துதல்.',
+                f3_title: 'சிறிய தொகுதி கவனம்',
+                f3_desc: 'ஒவ்வொரு மாணவருக்கும் தனிப்பட்ட கவனம் மற்றும் உடனடி சந்தேக தீர்வு கிடைப்பதை சிறிய தொகுதிகள் உறுதி செய்கின்றன.',
+                f4_title: 'கால மதிப்பீடுகள்',
+                f4_desc: 'இறுதிப் பள்ளித் தேர்வுகளுக்கு முன் முன்னேற்றத்தைக் கண்காணிக்க வாராந்திர சோதனைகள்.',
+                f5_title: 'தேர்வு மதிப்பெண் உதவிக்குறிப்புகள்',
+                f5_desc: 'கோட்பாடு மற்றும் நடைமுறை போர்டு தேர்வுகளில் முழு மதிப்பெண்களைப் பெற நிபுணர் வழிகாட்டுதல்கள்.',
+                f6_title: 'தொடர்ச்சியான ஆதரவு',
+                f6_desc: 'வகுப்பு நேரத்திற்கு வெளியே கூட வீட்டுப்பாட சந்தேகங்களைத் தீர்க்க நேரடி வழிகாட்டி அணுகல்.',
+                deep_heading: 'கோர் கான்செப்ட்ஸில் தேர்ச்சி பெறுதல்: <span>Python, C & C++</span>',
+                deep_desc: 'தொடரியல் நுணுக்கங்கள், நினைவக மேலாண்மை மற்றும் மேம்பட்ட நிரலாக்க கட்டமைப்புகளில் நீங்கள் எவ்வாறு தேர்ச்சி பெற உதவுகிறோம் என்பதற்கான ஆழமான பார்வை.',
+                d1_title: 'பைதான் ஆழமான பார்வை',
+                d1_desc: 'நவீன உயர்நிலை கணினி அறிவியல் பாடத்திட்டத்தின் மூலக்கல்லாகும் பைதான். சுத்தமான உள்தள்ளல் நடைமுறைகளில் நாங்கள் அதிக கவனம் செலுத்துகிறோம்.',
+                d1_li1: 'பட்டியல்கள், டூப்பிள்கள் & அகராதி புரிதல்கள்',
+                d1_li2: 'உரை & CSV கோப்பு செயல்பாடுகள் எளிமைப்படுத்தப்பட்டுள்ளன',
+                d1_li3: 'தரவுத்தள இணைப்பு (பைத்தானுடன் SQLite3)',
+                d2_title: 'C மொழி நிபுணத்துவம்',
+                d2_desc: 'C என்பது கட்டமைக்கப்பட்ட நிரலாக்கத்தின் முதுகெலும்பாகும். தொகுப்பு பிழைகளை நீங்கள் ஒருபோதும் பயப்படாமல் இருக்க எங்கள் அமர்வுகள் நினைவகக் கருத்துக்களை தெளிவுபடுத்துகின்றன.',
+                d2_li1: 'லூப்கள் மற்றும் கூடு கட்டுப்பாடு கட்டமைப்புகள்',
+                d2_li2: '1D & 2D மேட்ரிக்ஸ் கையாளுதல் திட்டங்கள்',
+                d2_li3: 'சுட்டிகள் மற்றும் முகவரி கணக்கீடு அறிமுகம்',
+                d3_title: 'C++ ஆப்ஜெக்ட்-ஓரியண்டட் கவனம்',
+                d3_desc: 'C++ சக்திவாய்ந்த ஆப்ஜெக்ட்-ஓரியண்டட் கொள்கைகளை அறிமுகப்படுத்துகிறது. சுருக்கமான கருத்துக்களை நாங்கள் எளிதாக எழுதும் குறியீடு டெம்ப்ளேட்டுகளாகப் பிரிக்கிறோம்.',
+                d3_li1: 'அணுகல் விவரக்குறிப்புகள் (பொது, தனியார், பாதுகாக்கப்பட்ட)',
+                d3_li2: 'கன்ஸ்ட்ரக்டர்கள், டெஸ்ட்ரக்டர்கள் மற்றும் ஸ்கோப் தீர்மானம்',
+                d3_li3: 'கோப்பு நீரோடைகள் (`ifstream`, `ofstream`, `fstream`)',
+                gal_heading: 'வளாகம் & லேப் <span>கேலரி</span>',
+                gal_desc: 'எங்கள் அதிநவீன கணினி ஆய்வக வசதிகள், ஊடாடும் மாணவர் அமர்வுகள் மற்றும் வகுப்பறை சூழல்களை விரைவாகப் பாருங்கள்.',
+                g1_title: 'ஊடாடும் லேப் பயிற்சி',
+                g1_desc: 'மாணவர்கள் தனிப்பட்ட அமைப்புகளுடன் கோடிங் கருத்துக்களை நடைமுறையில் பயிற்சி செய்கிறார்கள்.',
+                g2_title: 'மேம்பட்ட பட்டறை',
+                g2_desc: 'போர்டு தேர்வு சிக்கலை தீர்க்கும் நுட்பங்களில் கவனம் செலுத்தும் சிறப்பு அமர்வுகள்.',
+                g3_title: 'தனிப்பட்ட வழிகாட்டுதல்',
+                g3_desc: 'ஒவ்வொரு மாணவரின் சந்தேகங்களும் தீர்க்கப்படுவதை உறுதி செய்யும் ஒருவருக்கொருவர் கவனம்.',
+                g4_title: 'வெற்றிகரமான தொகுதி',
+                g4_desc: 'எங்கள் மாணவர்களுடன் சிறந்த மதிப்பெண்கள் மற்றும் கல்வி சிறப்பைக் கொண்டாடுகிறோம்.',
+                price_heading: 'பாட கட்டமைப்பு',
+                price_desc: 'தனிப்பட்ட கவனம் அல்லது குழு ஆய்வுக்காக வடிவமைக்கப்பட்ட வெளிப்படையான விலை திட்டங்கள்.',
+                p1_title: 'தனிநபர் சேர்க்கை',
+                p1_desc: 'தனிப்பட்ட வழிகாட்டுதல் மற்றும் முழு பாடத்திட்ட தேர்ச்சி.',
+                per_student: '/ மாணவர்',
+                p1_li1: 'பைதான், சி & சி++ முழு பயிற்சி',
+                p1_li2: 'முழுமையான பாடநூல் தீர்வுகள்',
+                p1_li3: 'வாராந்திர திருத்தம் & மாதிரி தேர்வுகள்',
+                p1_li4: 'தனிநபர் சந்தேக அனுமதி',
+                choose_ind: 'தனிநபரைத் தேர்ந்தெடுக்கவும்',
+                pop_choice: 'பிரபலமான தேர்வு',
+                p2_title: 'ஸ்குவாட் குழு திட்டம் (4 மாணவர்கள்)',
+                p2_desc: 'உங்கள் நெருங்கிய சக நண்பர்களுடன் படித்து குழு சேமிப்பை அனுபவிக்கவும்.',
+                p2_li1: 'அனைத்து தனிநபர் திட்ட நன்மைகள்',
+                p2_li2: 'கூட்டு சக கோடிங் அமர்வுகள்',
+                p2_li3: 'மாணவருக்கு ₹5,500 சேமிக்கவும்',
+                p2_li4: 'குழு பயிற்சி சவால்கள்',
+                choose_group: 'குழு திட்டத்தைத் தேர்ந்தெடுக்கவும்',
+                form_heading: 'மாணவர் சேர்க்கை படிவம்',
+                form_desc: 'பதிவுசெய்தலைத் தொடர கீழே உங்கள் விவரங்களை நிரப்பவும்.',
+                lbl_name: 'மாணவர் முழு பெயர்',
+                lbl_grade: 'தரம் / வகுப்பு',
+                opt_grade: 'தரத்தைத் தேர்ந்தெடுக்கவும்',
+                grade_11: '11 ஆம் வகுப்பு',
+                grade_12: '12 ஆம் வகுப்பு',
+                lbl_phone: 'வாட்ஸ்அப் மொபைல் எண்',
+                lbl_email: 'மின்னஞ்சல் முகவரி',
+                lbl_subject: 'விருப்பமான பாடம்',
+                opt_subject: 'பாடத்தைத் தேர்ந்தெடுக்கவும்',
+                subj_all: 'பைதான், சி & சி++ (மூன்றும்)',
+                lbl_plan: 'சேர்க்கை திட்டம்',
+                opt_plan: 'திட்டத்தைத் தேர்ந்தெடுக்கவும்',
+                plan_ind: 'தனிநபர் திட்டம் (₹12,500)',
+                plan_group: 'ஸ்குவாட் குழு திட்டம் (மாணவருக்கு ₹7,000)',
+                plan_single: 'சிறப்பு ஒற்றைப் පාடம் (₹7,500)',
+                lbl_city: 'நகரம் / ஊர்',
+                lbl_school: 'பள்ளி பெயர்',
+                btn_pay: 'பாதுகாப்பான கட்டணத்திற்குச் செல்லவும்',
+                modal_title: 'கட்டணத்தை முடிக்கவும்',
+                modal_scan: 'GPay, PhonePe, Paytm அல்லது எந்த UPI செயலி மூலமாகவும் ஸ்கேன் செய்யவும்',
+                bank_title: 'நேரடி வங்கி பரிமாற்றம் (NEFT/IMPS):',
+                bank_name_lbl: 'கணக்கு பெயர்:',
+                bank_acc_lbl: 'கணக்கு எண்:',
+                bank_ifsc_lbl: 'IFSC குறியீடு:',
+                bank_bank_lbl: 'வங்கி பெயர்:',
+                btn_whatsapp: 'நான் பணம் செலுத்திவிட்டேன் – சமர்ப்பித்து வாட்ஸ்அப் அனுப்பவும்',
+                footer_text: '&copy; 2026 <span>IPL டெக்னாலஜிஸ்</span>. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை. கேள்விகளுக்கு, வாட்ஸ்அப் பொத்தானைத் தட்டவும் அல்லது அழைக்கவும்',
+                student_credit: 'பக்கம் தீபக் சங்கரால் செய்யப்பட்டது (IPL டெக்னாலஜி மாணவர்)'
+            }
+        };
+
+        let currentLang = 'en';
+        let originalTexts = new Map();
+
+        function toggleLanguage() {
+            if (currentLang === 'en') {
+                // Translate to Tamil
+                currentLang = 'ta';
+                document.getElementById('langBtnText').textContent = 'English';
+                
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    const key = el.getAttribute('data-translate');
+                    if (!originalTexts.has(el)) {
+                        originalTexts.set(el, el.innerHTML);
+                    }
+                    if (translations.ta[key]) {
+                        el.innerHTML = translations.ta[key];
+                    }
+                });
+            } else {
+                // Revert to English
+                currentLang = 'en';
+                document.getElementById('langBtnText').textContent = 'தமிழ் (Tamil)';
+                
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    if (originalTexts.has(el)) {
+                        el.innerHTML = originalTexts.get(el);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
