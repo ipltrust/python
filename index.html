@@ -851,6 +851,20 @@
             margin-bottom: 14px;
         }
 
+        .offer-notice {
+            background: rgba(250, 204, 21, 0.15);
+            border: 1px dashed var(--accent-yellow);
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            color: var(--accent-yellow);
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .price-amount {
             font-size: 2rem;
             font-weight: 800;
@@ -970,6 +984,19 @@
             }
         }
 
+        .form-btn-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        @media(min-width: 500px) {
+            .form-btn-group {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
         .submit-btn {
             width: 100%;
             padding: 13px;
@@ -977,18 +1004,49 @@
             color: #070b14;
             font-family: inherit;
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             border-radius: 8px;
             border: none;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.8px;
             transition: background 0.2s ease;
-            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         .submit-btn:hover {
             background: var(--accent-yellow-hover);
+        }
+
+        .enquiry-btn {
+            background: #25d366;
+            color: #ffffff;
+        }
+
+        .enquiry-btn:hover {
+            background: #1eb954;
+        }
+
+        /* Group Members Section in Form */
+        .group-members-box {
+            background: rgba(250, 204, 21, 0.05);
+            border: 1px dashed var(--accent-yellow);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 14px;
+            display: none;
+        }
+
+        .group-members-box h4 {
+            font-size: 0.85rem;
+            color: var(--accent-yellow);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         /* Multi-Step Payment Modal Overlay */
@@ -1139,7 +1197,7 @@
 
     <!-- Catchy Top Banner Header with Online & Offline Announcement -->
     <div class="top-banner">
-        <span data-translate="top_banner_text"><i class="fas fa-graduation-cap"></i> Are you a grade 11/12 student and wish to learn Python or C++?</span>
+        <span data-translate="top_banner_text"><i class="fas fa-graduation-cap"></i> Are you a grade 11/12 student and wish to learn Python or C, C++?</span>
         <span class="mode-pill" data-translate="modes_available"><i class="fas fa-wifi"></i> Online & <i class="fas fa-chalkboard-teacher"></i> Offline Classes Available</span>
     </div>
 
@@ -1442,6 +1500,12 @@
                     <h3 data-translate="p_single_title">Special Single Course</h3>
                     <p data-translate="p_single_desc">Focused single language module in Python, C or C++.</p>
                 </div>
+                
+                <!-- Bring 3 People Offer Highlight -->
+                <div class="offer-notice" data-translate="offer_notice">
+                    <i class="fas fa-users"></i> Bring 3 people with you together to avail this offer!
+                </div>
+
                 <div class="price-amount">₹7,500 <span data-translate="per_student">/ student</span></div>
                 <ul class="price-features">
                     <li data-translate="p_single_li1"><i class="fas fa-check"></i> Choose Python, C or C++ Specialization</li>
@@ -1449,7 +1513,7 @@
                     <li data-translate="p_single_li3"><i class="fas fa-check"></i> Practical Terminal Hands-on Practice</li>
                     <li data-translate="p_single_li4"><i class="fas fa-check"></i> Board Exam Focused Doubt Support</li>
                 </ul>
-                <a href="#enroll" class="btn-action btn-glow" style="justify-content: center; width: 100%; text-align: center;" data-translate="choose_single">Choose Special Course</a>
+                <a href="#enroll" onclick="selectPlanFromCard('Special Single Course (₹7,500)')" class="btn-action btn-glow" style="justify-content: center; width: 100%; text-align: center;" data-translate="choose_single">Choose Special Course</a>
             </div>
 
             <!-- SECOND: ₹12,500 Full Individual Plan -->
@@ -1465,7 +1529,7 @@
                     <li data-translate="p1_li3"><i class="fas fa-check"></i> Weekly Revision & Mock Tests</li>
                     <li data-translate="p1_li4"><i class="fas fa-check"></i> Individual Doubt Clearance</li>
                 </ul>
-                <a href="#enroll" class="btn-action" style="justify-content: center; background: rgba(250, 204, 21, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow);" data-translate="choose_ind">Choose Full Individual Plan</a>
+                <a href="#enroll" onclick="selectPlanFromCard('Individual Plan (₹12,500)')" class="btn-action" style="justify-content: center; background: rgba(250, 204, 21, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow);" data-translate="choose_ind">Choose Full Individual Plan</a>
             </div>
         </div>
     </section>
@@ -1477,7 +1541,7 @@
                 <h2 data-translate="form_heading">Student Enrollment Form</h2>
                 <p data-translate="form_desc">Please fill in your details below to proceed with registration.</p>
             </div>
-            <form id="enrollmentForm" onsubmit="handleFormSubmit(event)">
+            <form id="enrollmentForm">
                 <div class="form-row">
                     <div class="form-group">
                         <label data-translate="lbl_name">Student Full Name</label>
@@ -1522,11 +1586,29 @@
                     </div>
                     <div class="form-group">
                         <label data-translate="lbl_plan">Enrollment Plan</label>
-                        <select id="fieldPlan" class="form-control" required>
+                        <select id="fieldPlan" class="form-control" onchange="toggleGroupMembers()" required>
                             <option value="" disabled selected data-translate="opt_plan">Select Plan</option>
-                            <option value="Special Single Course (₹7,500)" data-price="7500" data-translate="plan_single">Special Single Course (₹7,500) - EMPHASIZED</option>
+                            <option value="Special 4 member Course (₹7,500)" data-price="7500" data-translate="plan_single">Special Single Course (₹7,500) - EMPHASIZED</option>
                             <option value="Individual Plan (₹12,500)" data-price="12500" data-translate="plan_ind">Individual Plan (₹12,500)</option>
+                           
                         </select>
+                    </div>
+                </div>
+
+                <!-- Dynamic Group Members Fields (Triggers when ₹7,500 Special Plan is selected) -->
+                <div class="group-members-box" id="groupMembersBox">
+                    <h4 data-translate="group_heading"><i class="fas fa-users"></i> Enter Names of 3 Accompanying Members:</h4>
+                    <div class="form-group">
+                        <label data-translate="lbl_member1">Member 1 Name</label>
+                        <input type="text" id="fieldMember1" class="form-control" placeholder="Enter first member's name">
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="lbl_member2">Member 2 Name</label>
+                        <input type="text" id="fieldMember2" class="form-control" placeholder="Enter second member's name">
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="lbl_member3">Member 3 Name</label>
+                        <input type="text" id="fieldMember3" class="form-control" placeholder="Enter third member's name">
                     </div>
                 </div>
 
@@ -1541,7 +1623,15 @@
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn" data-translate="btn_pay">Proceed to Payment <i class="fas fa-lock" style="margin-left: 6px; font-size: 0.8rem;"></i></button>
+                <!-- Submission Action Buttons -->
+                <div class="form-btn-group">
+                    <button type="button" onclick="sendEnquiry()" class="submit-btn enquiry-btn" data-translate="btn_enquiry">
+                        <i class="fab fa-whatsapp" style="font-size: 1rem;"></i> Enquiry Only
+                    </button>
+                    <button type="button" onclick="handlePaymentProceed()" class="submit-btn" data-translate="btn_pay">
+                        Proceed to Payment <i class="fas fa-lock" style="margin-left: 4px; font-size: 0.8rem;"></i>
+                    </button>
+                </div>
             </form>
         </div>
     </section>
@@ -1556,6 +1646,7 @@
         <input type="text" name="plan" id="fs_plan">
         <input type="text" name="city" id="fs_city">
         <input type="text" name="school" id="fs_school">
+        <input type="text" name="group_members" id="fs_members">
         <input type="text" name="txn_ref" id="fs_txn_ref">
         <input type="text" name="message" id="fs_message">
     </form>
@@ -1572,7 +1663,7 @@
                 <p id="modalDynamicText" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; font-weight: 700;">Pay ₹7,500 via GPay or Scan QR</p>
                 
                 <div class="qr-image-wrapper">
-                    <img src="qr.jpg" alt="UPI QR Code" onerror="this.onerror=null; this.src='qr.jpeg';">
+                    <img src="qr2.png" alt="UPI QR Code" onerror="this.onerror=null; this.src='qr.jpeg';">
                 </div>
                 
                 <p style="font-size: 0.72rem; color: var(--accent-yellow);" data-translate="modal_scan">Scan via GPay, PhonePe, Paytm or any UPI app</p>
@@ -1655,17 +1746,77 @@
 
         let applicantData = {};
 
-        function handleFormSubmit(event) {
-            event.preventDefault();
+        function toggleGroupMembers() {
+            const planVal = document.getElementById('fieldPlan').value;
+            const groupBox = document.getElementById('groupMembersBox');
+            if (planVal.includes('7,500') || planVal.includes('7,000')) {
+                groupBox.style.display = 'block';
+            } else {
+                groupBox.style.display = 'none';
+            }
+        }
+
+        function selectPlanFromCard(planName) {
+            const planSelect = document.getElementById('fieldPlan');
+            for (let i = 0; i < planSelect.options.length; i++) {
+                if (planSelect.options[i].value.includes('7,500') && planName.includes('7,500')) {
+                    planSelect.selectedIndex = i;
+                    break;
+                } else if (planSelect.options[i].value.includes('12,500') && planName.includes('12,500')) {
+                    planSelect.selectedIndex = i;
+                    break;
+                }
+            }
+            toggleGroupMembers();
+        }
+
+        function collectFormData() {
+            const form = document.getElementById('enrollmentForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return false;
+            }
+
             applicantData.name = document.getElementById('fieldName').value;
             applicantData.grade = document.getElementById('fieldGrade').value;
             applicantData.phone = document.getElementById('fieldPhone').value;
             applicantData.mode = document.getElementById('fieldMode').value;
             applicantData.subject = document.getElementById('fieldSubject').value;
+            applicantData.plan = document.getElementById('fieldPlan').value;
+            applicantData.city = document.getElementById('fieldCity').value;
+            applicantData.school = document.getElementById('fieldSchool').value;
+
+            // Members
+            let m1 = document.getElementById('fieldMember1').value.trim();
+            let m2 = document.getElementById('fieldMember2').value.trim();
+            let m3 = document.getElementById('fieldMember3').value.trim();
+            let membersList = [];
+            if (m1) membersList.push(m1);
+            if (m2) membersList.push(m2);
+            if (m3) membersList.push(m3);
+            applicantData.members = membersList.length > 0 ? membersList.join(', ') : 'None';
+
+            return true;
+        }
+
+        // Enquiry Only via WhatsApp (No Payment Required)
+        function sendEnquiry() {
+            if (!collectFormData()) return;
+
+            let msg = `Hello IPL Technologies! I have an enquiry regarding enrollment.%0A%0A- Name: ${applicantData.name}%0A- Grade: ${applicantData.grade}%0A- Parents Phone: ${applicantData.phone}%0A- Class Mode: ${applicantData.mode}%0A- Preferred Subject: ${applicantData.subject}%0A- Selected Plan: ${applicantData.plan}%0A- City: ${applicantData.city}%0A- School: ${applicantData.school}`;
             
+            if (applicantData.members !== 'None') {
+                msg += `%0A- Accompanying Members: ${applicantData.members}`;
+            }
+
+            window.open(`https://wa.me/919842114238?text=${msg}`, '_blank');
+        }
+
+        // Proceed to Modal Payment
+        function handlePaymentProceed() {
+            if (!collectFormData()) return;
+
             const planSelect = document.getElementById('fieldPlan');
-            applicantData.plan = planSelect.value;
-            
             let selectedOption = planSelect.options[planSelect.selectedIndex];
             let priceText = "7,500";
             if (selectedOption.hasAttribute('data-price')) {
@@ -1677,9 +1828,6 @@
             }
 
             document.getElementById('modalDynamicText').innerHTML = `Pay <span style="color: var(--accent-yellow); font-size: 1rem;">₹${priceText}</span> via GPay or Scan QR`;
-
-            applicantData.city = document.getElementById('fieldCity').value;
-            applicantData.school = document.getElementById('fieldSchool').value;
 
             // Show step 1 of modal
             goToStep1();
@@ -1718,8 +1866,9 @@
             document.getElementById('fs_plan').value = applicantData.plan;
             document.getElementById('fs_city').value = applicantData.city;
             document.getElementById('fs_school').value = applicantData.school;
+            document.getElementById('fs_members').value = applicantData.members;
             document.getElementById('fs_txn_ref').value = applicantData.txnRef;
-            document.getElementById('fs_message').value = `New Enrollment: ${applicantData.name} (${applicantData.grade}) registered for ${applicantData.subject} under ${applicantData.plan} [Mode: ${applicantData.mode}]. Txn Ref: ${applicantData.txnRef}. City: ${applicantData.city}, School: ${applicantData.school}, Parent's Phone: ${applicantData.phone}`;
+            document.getElementById('fs_message').value = `New Enrollment: ${applicantData.name} (${applicantData.grade}) registered for ${applicantData.subject} under ${applicantData.plan} [Mode: ${applicantData.mode}]. Members: ${applicantData.members}. Txn Ref: ${applicantData.txnRef}. City: ${applicantData.city}, School: ${applicantData.school}, Parent's Phone: ${applicantData.phone}`;
 
             // Submit data to Formspree endpoint in background
             const formspreeData = new FormData(document.getElementById('formspreeForm'));
@@ -1731,8 +1880,15 @@
                 }
             }).catch(error => console.log('Formspree submission error:', error));
 
-            // Open WhatsApp with populated confirmation message including Txn Ref
-            const message = `Hello IPL Technologies! I have completed my payment.%0A%0A- Name: ${applicantData.name}%0A- Grade: ${applicantData.grade}%0A- Parents Phone: ${applicantData.phone}%0A- Class Mode: ${applicantData.mode}%0A- Subject: ${applicantData.subject}%0A- Plan: ${applicantData.plan}%0A- City: ${applicantData.city}%0A- School: ${applicantData.school}%0A- Txn ID/Ref: ${applicantData.txnRef}%0A%0A[Payment screenshot attached below]`;
+            // Open WhatsApp with populated confirmation message including Txn Ref & Members
+            let message = `Hello IPL Technologies! I have completed my payment.%0A%0A- Name: ${applicantData.name}%0A- Grade: ${applicantData.grade}%0A- Parents Phone: ${applicantData.phone}%0A- Class Mode: ${applicantData.mode}%0A- Subject: ${applicantData.subject}%0A- Plan: ${applicantData.plan}%0A- City: ${applicantData.city}%0A- School: ${applicantData.school}`;
+            
+            if (applicantData.members !== 'None') {
+                message += `%0A- Accompanying Members: ${applicantData.members}`;
+            }
+
+            message += `%0A- Txn ID/Ref: ${applicantData.txnRef}%0A%0A[Payment screenshot attached below]`;
+
             window.open(`https://wa.me/919842114238?text=${message}`, '_blank');
 
             closeModal();
@@ -1833,6 +1989,7 @@
                 price_desc: 'வெளிப்படையான விலை திட்டங்கள்.',
                 p_single_title: 'சிறப்பு ஒற்றைப் பாடத்திட்டம்',
                 p_single_desc: 'பைதான், சி அல்லது சி++ இல் கவனம் செலுத்தப்பட்ட ஒற்றை மொழி பயிற்சி.',
+                offer_notice: '<i class="fas fa-users"></i> இந்த சலுகையைப் பெற உங்களுடன் 3 நபர்களை அழைத்து வாருங்கள்!',
                 p_single_li1: 'பைதான், சி அல்லது சி++ தேர்வு முறை',
                 p_single_li2: 'முழுமையான பாடநூல் பயிற்சிகள் மற்றும் தீர்வுகள்',
                 p_single_li3: 'கணினி முனைய செய்முறை பயிற்சி',
@@ -1868,8 +2025,13 @@
                 plan_single: 'சிறப்பு ஒற்றைப் பாடம் (₹7,500) - முதன்மையானது',
                 plan_ind: 'தனிநபர் திட்டம் (₹12,500)',
                 plan_group: 'ஸ்குவாட் குழு திட்டம் (மாணவருக்கு ₹7,000)',
+                group_heading: '<i class="fas fa-users"></i> உங்களுடன் வரும் 3 நபர்களின் பெயர்களை உள்ளிடவும்:',
+                lbl_member1: 'நபர் 1 பெயர்',
+                lbl_member2: 'நபர் 2 பெயர்',
+                lbl_member3: 'நபர் 3 பெயர்',
                 lbl_city: 'நகரம் / ஊர்',
                 lbl_school: 'பள்ளி பெயர்',
+                btn_enquiry: '<i class="fab fa-whatsapp"></i> தகவலுக்கு மட்டும் (Enquiry)',
                 btn_pay: 'கட்டணத்திற்குச் செல்லவும்',
                 modal_title: 'கட்டணத்தை முடிக்கவும்',
                 modal_scan: 'GPay, PhonePe, Paytm அல்லது எந்த UPI செயலி மூலமாகவும் ஸ்கேன் செய்யவும்',
