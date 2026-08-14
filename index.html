@@ -111,8 +111,9 @@
             white-space: nowrap;
         }
 
-        .btn-action {
-            background: var(--accent-yellow);
+        /* Standard Button Style (for non-animated buttons) */
+        .btn-action-static {
+            background-color: var(--accent-yellow);
             color: #070b14;
             font-weight: 800;
             padding: 8px 16px;
@@ -121,7 +122,7 @@
             font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            transition: all 0.2s ease;
+            transition: transform 0.2s ease, background-color 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -130,24 +131,48 @@
             white-space: nowrap;
         }
 
-        /* Glowing Effect for Buttons */
-        .btn-glow {
-            animation: pulse-glow 1.5s infinite alternate;
+        .btn-action-static:hover {
+            background-color: var(--accent-yellow-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Dedicated Color-Cycling Animation ONLY for "Enroll Now" buttons */
+        @keyframes enrollColorCycle {
+            0% { background-color: #ef4444; color: #ffffff; }
+            50% { background-color: #facc15; color: #070b14; }
+            100% { background-color: #ef4444; color: #ffffff; }
+        }
+
+        .btn-enroll-animated {
+            animation: enrollColorCycle 2s infinite ease-in-out, pulse-glow 1.5s infinite alternate;
+            font-weight: 800;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
         }
 
         @keyframes pulse-glow {
             0% {
-                box-shadow: 0 0 5px var(--accent-yellow), 0 0 10px var(--accent-yellow);
+                box-shadow: 0 0 5px #ef4444, 0 0 10px #ef4444;
                 transform: scale(1);
             }
             100% {
-                box-shadow: 0 0 15px var(--accent-yellow), 0 0 25px var(--accent-yellow);
+                box-shadow: 0 0 15px #facc15, 0 0 25px #facc15;
                 transform: scale(1.03);
             }
         }
 
-        .btn-action:hover {
-            background: var(--accent-yellow-hover);
+        .btn-enroll-animated:hover {
             transform: translateY(-1px);
         }
 
@@ -786,7 +811,7 @@
             color: var(--text-muted);
         }
 
-        /* Pricing Section (Emphasized 7500 Course First) */
+        /* Pricing Section */
         .pricing-section {
             padding: 40px 4%;
         }
@@ -816,7 +841,7 @@
             position: relative;
         }
 
-        /* Emphasized Style for ₹7,500 Special Single Course */
+        /* Emphasized Style for Special 4 Course */
         .price-card.emphasized {
             border: 2px solid var(--accent-yellow);
             background: linear-gradient(150deg, #182848 0%, #0b1326 100%);
@@ -1000,7 +1025,7 @@
         .submit-btn {
             width: 100%;
             padding: 13px;
-            background: var(--accent-yellow);
+            background-color: var(--accent-yellow);
             color: #070b14;
             font-family: inherit;
             font-weight: 800;
@@ -1010,7 +1035,7 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            transition: background 0.2s ease;
+            transition: background-color 0.2s ease, opacity 0.2s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -1018,16 +1043,17 @@
         }
 
         .submit-btn:hover {
-            background: var(--accent-yellow-hover);
+            background-color: var(--accent-yellow-hover);
+            opacity: 0.95;
         }
 
         .enquiry-btn {
-            background: #25d366;
-            color: #ffffff;
+            background: #25d366 !important;
+            color: #ffffff !important;
         }
 
         .enquiry-btn:hover {
-            background: #1eb954;
+            background: #1eb954 !important;
         }
 
         /* Group Members Section in Form */
@@ -1206,13 +1232,13 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Fixed Bottom Urgent Timer Bar with Fast Milliseconds & Glowing Button -->
+    <!-- Fixed Bottom Urgent Timer Bar with Fast Milliseconds & Animated "Enroll Now" Button -->
     <div class="urgency-bar">
         <div class="urgency-text">
             <span data-translate="batch_closing"><i class="fas fa-clock" style="color: var(--accent-yellow);"></i> Batch Closing In:</span>
             <span class="fast-countdown" id="fastTimer">01h 42m 15s 894ms</span>
         </div>
-        <a href="#enroll" class="btn-action btn-glow" data-translate="enroll_now">
+        <a href="#enroll" class="btn-enroll-animated" data-translate="enroll_now">
             Enroll Now <i class="fas fa-arrow-right"></i>
         </a>
     </div>
@@ -1248,7 +1274,7 @@
                 <li data-translate="feat_3"><i class="fas fa-check-circle"></i> Previous Board Exam Question Bank</li>
                 <li data-translate="feat_4"><i class="fas fa-check-circle"></i> Individual Doubt Clarification</li>
             </ul>
-            <a href="#enroll" class="btn-action btn-glow" style="padding: 11px 24px; font-size: 0.86rem;" data-translate="secure_seat">
+            <a href="#enroll" class="btn-enroll-animated" style="padding: 11px 24px; font-size: 0.86rem;" data-translate="secure_seat">
                 Secure Your Seat <i class="fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1486,34 +1512,34 @@
         </div>
     </section>
 
-    <!-- Pricing Section (₹7,500 Course First and Strongly Emphasized) -->
+    <!-- Pricing Section -->
     <section class="pricing-section" id="pricing">
         <div class="section-header">
             <h2 data-translate="price_heading">Course Fee Structure</h2>
             <p data-translate="price_desc">Transparent pricing plans tailored for individual attention or focused subject mastery.</p>
         </div>
         <div class="pricing-grid">
-            <!-- FIRST & EMPHASIZED: ₹7,500 Special Single Course -->
+            <!-- FIRST & EMPHASIZED: Special 4 Course -->
             <div class="price-card emphasized">
                 <div class="featured-tag" data-translate="pop_choice">★ MOST POPULAR</div>
                 <div class="price-header">
-                    <h3 data-translate="p_single_title">Special Single Course</h3>
-                    <p data-translate="p_single_desc">Focused single language module in Python, C or C++.</p>
+                    <h3 data-translate="p_single_title">Special 4 Course</h3>
+                    <p data-translate="p_single_desc">Special package for 4 persons (₹7,500 per person, total cost ₹30,000).</p>
                 </div>
                 
-                <!-- Bring 3 People Offer Highlight -->
+                <!-- Bring People Offer Highlight -->
                 <div class="offer-notice" data-translate="offer_notice">
-                    <i class="fas fa-users"></i> Bring 3 people with you together to avail this offer!
+                    <i class="fas fa-users"></i> Per person is ₹7,500 and for 4 it would cost (₹7,500 × 4 = ₹30,000)!
                 </div>
 
-                <div class="price-amount">₹7,500 <span data-translate="per_student">/ student</span></div>
+                <div class="price-amount">₹30,000 <span data-translate="per_group">/ group of 4</span></div>
                 <ul class="price-features">
-                    <li data-translate="p_single_li1"><i class="fas fa-check"></i> Choose Python, C or C++ Specialization</li>
+                    <li data-translate="p_single_li1"><i class="fas fa-check"></i> Special 4 Course Package (₹7,500 per person)</li>
                     <li data-translate="p_single_li2"><i class="fas fa-check"></i> Complete Chapter Exercises & Solutions</li>
                     <li data-translate="p_single_li3"><i class="fas fa-check"></i> Practical Terminal Hands-on Practice</li>
                     <li data-translate="p_single_li4"><i class="fas fa-check"></i> Board Exam Focused Doubt Support</li>
                 </ul>
-                <a href="#enroll" onclick="selectPlanFromCard('Special Single Course (₹7,500)')" class="btn-action btn-glow" style="justify-content: center; width: 100%; text-align: center;" data-translate="choose_single">Choose Special Course</a>
+                <a href="#enroll" onclick="selectPlanFromCard('Special 4 Course (₹30,000)')" class="btn-action-static" style="justify-content: center; width: 100%; text-align: center;" data-translate="choose_single">Choose Special 4 Course</a>
             </div>
 
             <!-- SECOND: ₹12,500 Full Individual Plan -->
@@ -1529,7 +1555,7 @@
                     <li data-translate="p1_li3"><i class="fas fa-check"></i> Weekly Revision & Mock Tests</li>
                     <li data-translate="p1_li4"><i class="fas fa-check"></i> Individual Doubt Clearance</li>
                 </ul>
-                <a href="#enroll" onclick="selectPlanFromCard('Individual Plan (₹12,500)')" class="btn-action" style="justify-content: center; background: rgba(250, 204, 21, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow);" data-translate="choose_ind">Choose Full Individual Plan</a>
+                <a href="#enroll" onclick="selectPlanFromCard('Individual Plan (₹12,500)')" class="btn-action-static" style="justify-content: center;" data-translate="choose_ind">Choose Full Individual Plan</a>
             </div>
         </div>
     </section>
@@ -1588,14 +1614,13 @@
                         <label data-translate="lbl_plan">Enrollment Plan</label>
                         <select id="fieldPlan" class="form-control" onchange="toggleGroupMembers()" required>
                             <option value="" disabled selected data-translate="opt_plan">Select Plan</option>
-                            <option value="Special 4 member Course (₹7,500)" data-price="7500" data-translate="plan_single">Special Single Course (₹7,500) - EMPHASIZED</option>
+                            <option value="Special 4 Course" data-price="30000" data-translate="plan_single">Special 4 Course (₹7,500 per person, Total ₹30,000)</option>
                             <option value="Individual Plan (₹12,500)" data-price="12500" data-translate="plan_ind">Individual Plan (₹12,500)</option>
-                           
                         </select>
                     </div>
                 </div>
 
-                <!-- Dynamic Group Members Fields (Triggers when ₹7,500 Special Plan is selected) -->
+                <!-- Dynamic Group Members Fields (Triggers when Special 4 Course is selected) -->
                 <div class="group-members-box" id="groupMembersBox">
                     <h4 data-translate="group_heading"><i class="fas fa-users"></i> Enter Names of 3 Accompanying Members:</h4>
                     <div class="form-group">
@@ -1636,21 +1661,6 @@
         </div>
     </section>
 
-    <!-- Hidden Formspree Form for Automatic Response Sheet Submission -->
-    <form id="formspreeForm" action="https://formspree.io/f/xqpzllev" method="POST" style="display: none;">
-        <input type="text" name="name" id="fs_name">
-        <input type="text" name="grade" id="fs_grade">
-        <input type="tel" name="parent_phone" id="fs_phone">
-        <input type="text" name="class_mode" id="fs_mode">
-        <input type="text" name="subject" id="fs_subject">
-        <input type="text" name="plan" id="fs_plan">
-        <input type="text" name="city" id="fs_city">
-        <input type="text" name="school" id="fs_school">
-        <input type="text" name="group_members" id="fs_members">
-        <input type="text" name="txn_ref" id="fs_txn_ref">
-        <input type="text" name="message" id="fs_message">
-    </form>
-
     <!-- Two-Step Payment Confirmation Modal -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-box">
@@ -1660,7 +1670,7 @@
             <div id="modalStep1">
                 <span class="step-indicator" data-translate="step1_tag">Step 1 of 2: Scan & Pay</span>
                 <h3 style="font-size: 1.2rem; margin-bottom: 4px; color: var(--accent-yellow);" data-translate="modal_title">Complete Your Payment</h3>
-                <p id="modalDynamicText" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; font-weight: 700;">Pay ₹7,500 via GPay or Scan QR</p>
+                <p id="modalDynamicText" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; font-weight: 700;">Pay via GPay or Scan QR</p>
                 
                 <div class="qr-image-wrapper">
                     <img src="qr2.PNG" alt="UPI QR Code" onerror="this.onerror=null; this.src='qr.jpeg';">
@@ -1686,7 +1696,7 @@
                 </div>
 
                 <!-- Next Step Button -->
-                <button onclick="goToStep2()" class="submit-btn" style="margin-top: 14px; background: #22c55e; color: #ffffff; display: flex; align-items: center; justify-content: center; gap: 8px;" data-translate="btn_if_paid">
+                <button onclick="goToStep2()" class="submit-btn" style="margin-top: 14px; color: #070b14; display: flex; align-items: center; justify-content: center; gap: 8px;" data-translate="btn_if_paid">
                     <i class="fas fa-check-circle"></i> If Paid, Click Here to Verify
                 </button>
             </div>
@@ -1702,7 +1712,7 @@
                     <input type="text" id="fieldTxnRef" class="form-control" placeholder="e.g., 402918291048" required>
                 </div>
 
-                <button onclick="confirmPaymentAndSubmit()" class="submit-btn" style="background: #22c55e; color: #ffffff; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;" data-translate="btn_final_submit">
+                <button onclick="confirmPaymentAndSubmit()" class="submit-btn" style="color: #070b14; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;" data-translate="btn_final_submit">
                     <i class="fab fa-whatsapp" style="font-size: 1.1rem;"></i> Confirm & Open WhatsApp
                 </button>
                 
@@ -1749,7 +1759,7 @@
         function toggleGroupMembers() {
             const planVal = document.getElementById('fieldPlan').value;
             const groupBox = document.getElementById('groupMembersBox');
-            if (planVal.includes('7,500') || planVal.includes('7,000')) {
+            if (planVal.includes('Special 4 Course') || planVal.includes('7,500')) {
                 groupBox.style.display = 'block';
             } else {
                 groupBox.style.display = 'none';
@@ -1759,7 +1769,7 @@
         function selectPlanFromCard(planName) {
             const planSelect = document.getElementById('fieldPlan');
             for (let i = 0; i < planSelect.options.length; i++) {
-                if (planSelect.options[i].value.includes('7,500') && planName.includes('7,500')) {
+                if (planSelect.options[i].value.includes('Special 4 Course') && planName.includes('Special 4 Course')) {
                     planSelect.selectedIndex = i;
                     break;
                 } else if (planSelect.options[i].value.includes('12,500') && planName.includes('12,500')) {
@@ -1818,7 +1828,7 @@
 
             const planSelect = document.getElementById('fieldPlan');
             let selectedOption = planSelect.options[planSelect.selectedIndex];
-            let priceText = "7,500";
+            let priceText = "30,000";
             if (selectedOption.hasAttribute('data-price')) {
                 let rawPrice = selectedOption.getAttribute('data-price');
                 priceText = Number(rawPrice).toLocaleString('en-IN');
@@ -1856,29 +1866,6 @@
             }
 
             applicantData.txnRef = txnRefInput;
-
-            // Populate hidden Formspree form fields
-            document.getElementById('fs_name').value = applicantData.name;
-            document.getElementById('fs_grade').value = applicantData.grade;
-            document.getElementById('fs_phone').value = applicantData.phone;
-            document.getElementById('fs_mode').value = applicantData.mode;
-            document.getElementById('fs_subject').value = applicantData.subject;
-            document.getElementById('fs_plan').value = applicantData.plan;
-            document.getElementById('fs_city').value = applicantData.city;
-            document.getElementById('fs_school').value = applicantData.school;
-            document.getElementById('fs_members').value = applicantData.members;
-            document.getElementById('fs_txn_ref').value = applicantData.txnRef;
-            document.getElementById('fs_message').value = `New Enrollment: ${applicantData.name} (${applicantData.grade}) registered for ${applicantData.subject} under ${applicantData.plan} [Mode: ${applicantData.mode}]. Members: ${applicantData.members}. Txn Ref: ${applicantData.txnRef}. City: ${applicantData.city}, School: ${applicantData.school}, Parent's Phone: ${applicantData.phone}`;
-
-            // Submit data to Formspree endpoint in background
-            const formspreeData = new FormData(document.getElementById('formspreeForm'));
-            fetch("https://formspree.io/f/xqpzllev", {
-                method: "POST",
-                body: formspreeData,
-                headers: {
-                    'Accept': 'json'
-                }
-            }).catch(error => console.log('Formspree submission error:', error));
 
             // Open WhatsApp with populated confirmation message including Txn Ref & Members
             let message = `Hello IPL Technologies! I have completed my payment.%0A%0A- Name: ${applicantData.name}%0A- Grade: ${applicantData.grade}%0A- Parents Phone: ${applicantData.phone}%0A- Class Mode: ${applicantData.mode}%0A- Subject: ${applicantData.subject}%0A- Plan: ${applicantData.plan}%0A- City: ${applicantData.city}%0A- School: ${applicantData.school}`;
@@ -1987,17 +1974,18 @@
                 g4_desc: 'சிறந்த மதிப்பெண்களைக் கொண்டாடுகிறோம்.',
                 price_heading: 'பாட கட்டமைப்பு',
                 price_desc: 'வெளிப்படையான விலை திட்டங்கள்.',
-                p_single_title: 'சிறப்பு ஒற்றைப் பாடத்திட்டம்',
-                p_single_desc: 'பைதான், சி அல்லது சி++ இல் கவனம் செலுத்தப்பட்ட ஒற்றை மொழி பயிற்சி.',
-                offer_notice: '<i class="fas fa-users"></i> இந்த சலுகையைப் பெற உங்களுடன் 3 நபர்களை அழைத்து வாருங்கள்!',
-                p_single_li1: 'பைதான், சி அல்லது சி++ தேர்வு முறை',
+                p_single_title: 'Special 4 Course',
+                p_single_desc: '4 நபர்களுக்கான சிறப்புத் திட்டம் (நபருக்கு ₹7,500 வீதம் மொத்தம் ₹30,000).',
+                offer_notice: '<i class="fas fa-users"></i> ஒரு நபருக்கு ₹7,500 மற்றும் 4 நபர்களுக்கு (₹7,500 × 4 = ₹30,000) ஆகும்!',
+                p_single_li1: 'Special 4 Course Package',
                 p_single_li2: 'முழுமையான பாடநூல் பயிற்சிகள் மற்றும் தீர்வுகள்',
                 p_single_li3: 'கணினி முனைய செய்முறை பயிற்சி',
                 p_single_li4: 'தேர்வு சார்ந்த சந்தேக தெளிவுபடுத்தல்',
-                choose_single: 'சிறப்பு பாடத்திட்டத்தைத் தேர்ந்தெடுக்கவும்',
+                choose_single: 'Special 4 Course-ஐ தேர்ந்தெடுக்கவும்',
                 p1_title: 'முழு தனிநபர் திட்டம்',
                 p1_desc: 'தனிப்பட்ட வழிகாட்டுதல் மற்றும் முழு பாடத்திட்ட தேர்ச்சி.',
                 per_student: '/ மாணவர்',
+                per_group: '/ 4 பேர் கொண்ட குழு',
                 p1_li1: 'பைதான், சி & சி++ முழு பயிற்சி',
                 p1_li2: 'முழுமையான பாடநூல் தீர்வுகள்',
                 p1_li3: 'வாராந்திர திருத்தம் & மாதிரி தேர்வுகள்',
@@ -2022,9 +2010,8 @@
                 subj_all: 'பைதான், சி & சி++ (மூன்றும்)',
                 lbl_plan: 'சேர்க்கை திட்டம்',
                 opt_plan: 'திட்டத்தைத் தேர்ந்தெடுக்கவும்',
-                plan_single: 'சிறப்பு ஒற்றைப் பாடம் (₹7,500) - முதன்மையானது',
+                plan_single: 'Special 4 Course (நபருக்கு ₹7,500, மொத்தம் ₹30,000)',
                 plan_ind: 'தனிநபர் திட்டம் (₹12,500)',
-                plan_group: 'ஸ்குவாட் குழு திட்டம் (மாணவருக்கு ₹7,000)',
                 group_heading: '<i class="fas fa-users"></i> உங்களுடன் வரும் 3 நபர்களின் பெயர்களை உள்ளிடவும்:',
                 lbl_member1: 'நபர் 1 பெயர்',
                 lbl_member2: 'நபர் 2 பெயர்',
